@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WinSecAudit - Demo Report</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: #0f172a; color: #e2e8f0; line-height: 1.6; padding: 2rem; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  h1 { font-size: 1.8rem; color: #f1f5f9; margin-bottom: 0.5rem; }
+  h2 { font-size: 1.3rem; color: #94a3b8; margin: 2rem 0 1rem; border-bottom: 1px solid #1e293b; padding-bottom: 0.5rem; }
+  .meta { color: #64748b; font-size: 0.9rem; margin-bottom: 2rem; }
+  .score-box { background: #1e293b; border-radius: 12px; padding: 2rem; text-align: center; margin-bottom: 2rem; }
+  .score-number { font-size: 4rem; font-weight: 700; color: #fbbf24; }
+  .score-label { font-size: 1rem; color: #94a3b8; }
+  .grade { font-size: 2rem; color: #fbbf24; margin-top: 0.5rem; }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+  .stat { background: #1e293b; border-radius: 8px; padding: 1rem; text-align: center; }
+  .stat-count { font-size: 2rem; font-weight: 700; }
+  .stat-label { font-size: 0.8rem; color: #94a3b8; }
+  .critical { color: #ef4444; } .high { color: #f97316; } .medium { color: #eab308; }
+  .low { color: #a3a3a3; } .info { color: #38bdf8; } .pass { color: #4ade80; }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; }
+  th { background: #1e293b; padding: 0.75rem; text-align: left; font-size: 0.85rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; }
+  td { padding: 0.75rem; border-bottom: 1px solid #1e293b; font-size: 0.9rem; vertical-align: top; }
+  tr:hover { background: #1e293b40; }
+  .severity-badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
+  .sev-critical { background: #7f1d1d; color: #fca5a5; }
+  .sev-high { background: #7c2d12; color: #fdba74; }
+  .sev-medium { background: #713f12; color: #fde047; }
+  .sev-low { background: #3f3f46; color: #a1a1aa; }
+  .sev-info { background: #0c4a6e; color: #7dd3fc; }
+  .sev-pass { background: #14532d; color: #86efac; }
+  .recommendation { color: #94a3b8; font-style: italic; font-size: 0.85rem; }
+  .footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid #1e293b; color: #475569; font-size: 0.8rem; text-align: center; }
+  .demo-banner { background: #7c3aed; color: white; text-align: center; padding: 0.5rem; border-radius: 8px; margin-bottom: 2rem; font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="demo-banner">DEMO REPORT - This is a sample output from WinSecAudit. Real reports include actual server data.</div>
+  <h1>WinSecAudit - Security Audit Report</h1>
+  <p class="meta">
+    <strong>Host:</strong> SRV-DC01 &nbsp;|&nbsp;
+    <strong>OS:</strong> Windows Server 2022 Standard &nbsp;|&nbsp;
+    <strong>Date:</strong> 2026-05-11 14:30:00 &nbsp;|&nbsp;
+    <strong>Version:</strong> 1.0.0
+  </p>
+
+  <div class="score-box">
+    <div class="score-label">Security Score</div>
+    <div class="score-number">62 / 100</div>
+    <div class="grade">Grade: D</div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="stat-count critical">2</div><div class="stat-label">Critical</div></div>
+    <div class="stat"><div class="stat-count high">4</div><div class="stat-label">High</div></div>
+    <div class="stat"><div class="stat-count medium">5</div><div class="stat-label">Medium</div></div>
+    <div class="stat"><div class="stat-count low">3</div><div class="stat-label">Low</div></div>
+    <div class="stat"><div class="stat-count info">2</div><div class="stat-label">Info</div></div>
+    <div class="stat"><div class="stat-count pass">12</div><div class="stat-label">Pass</div></div>
+  </div>
+
+  <h2>Findings (28 total)</h2>
+  <table>
+    <thead><tr><th>Severity</th><th>Category</th><th>Check</th><th>Description</th><th>Recommendation</th></tr></thead>
+    <tbody>
+      <tr><td><span class="severity-badge sev-critical">Critical</span></td><td>SMB</td><td>SMBv1 Enabled</td><td>SMBv1 protocol is ENABLED. This is the protocol exploited by WannaCry/NotPetya</td><td class="recommendation">Disable immediately: Set-SmbServerConfiguration -EnableSMB1Protocol $false -Force</td></tr>
+      <tr><td><span class="severity-badge sev-critical">Critical</span></td><td>Antivirus</td><td>Real-Time Protection Off</td><td>Windows Defender real-time protection is DISABLED</td><td class="recommendation">Enable: Set-MpPreference -DisableRealtimeMonitoring $false</td></tr>
+      <tr><td><span class="severity-badge sev-high">High</span></td><td>Account Policy</td><td>Default Admin Account Active</td><td>Built-in 'Administrator' account is active and named 'Administrator'</td><td class="recommendation">Rename the account and/or disable it. Use a named admin account instead.</td></tr>
+      <tr><td><span class="severity-badge sev-high">High</span></td><td>RDP</td><td>NLA Not Enforced</td><td>Network Level Authentication (NLA) is NOT required for RDP</td><td class="recommendation">Enable NLA: Set-ItemProperty 'HKLM:\SYSTEM\...\RDP-Tcp' -Name UserAuthentication -Value 1</td></tr>
+      <tr><td><span class="severity-badge sev-high">High</span></td><td>SMB</td><td>SMB Signing Not Required</td><td>SMB server does not REQUIRE security signatures (NTLM relay risk)</td><td class="recommendation">Set-SmbServerConfiguration -RequireSecuritySignature $true -Force</td></tr>
+      <tr><td><span class="severity-badge sev-high">High</span></td><td>Services</td><td>Unquoted Service Paths</td><td>3 service(s) have unquoted paths with spaces (privilege escalation vector): MyService, BackupAgent, PrintManager</td><td class="recommendation">Quote the path in the service registry or rename binaries to avoid spaces</td></tr>
+      <tr><td><span class="severity-badge sev-medium">Medium</span></td><td>Account Policy</td><td>Accounts Without Password Expiry</td><td>2 enabled account(s) have passwords that never expire: svc_backup, svc_sql</td><td class="recommendation">Set password expiration for all user accounts</td></tr>
+      <tr><td><span class="severity-badge sev-medium">Medium</span></td><td>Updates</td><td>Last Update: 45 days ago</td><td>Last installed update was 45 days ago (KB5034765)</td><td class="recommendation">Schedule regular patching</td></tr>
+      <tr><td><span class="severity-badge sev-medium">Medium</span></td><td>Services</td><td>Remote Registry Running</td><td>Remote Registry service is running</td><td class="recommendation">Disable if not needed: Stop-Service RemoteRegistry; Set-Service RemoteRegistry -StartupType Disabled</td></tr>
+      <tr><td><span class="severity-badge sev-medium">Medium</span></td><td>Network</td><td>Sensitive Ports Open</td><td>Potentially risky ports are listening: 135 (svchost), 445 (System), 3389 (svchost), 5985 (svchost)</td><td class="recommendation">Close unnecessary ports. Restrict access via firewall rules.</td></tr>
+      <tr><td><span class="severity-badge sev-medium">Medium</span></td><td>Logging</td><td>Security Log Too Small</td><td>Security log max size is 64MB (recommended: 256MB+)</td><td class="recommendation">Increase: wevtutil sl Security /ms:268435456</td></tr>
+      <tr><td><span class="severity-badge sev-low">Low</span></td><td>RDP</td><td>Default RDP Port</td><td>RDP is using default port 3389</td><td class="recommendation">Consider changing to a non-standard port to reduce noise</td></tr>
+      <tr><td><span class="severity-badge sev-low">Low</span></td><td>Information Disclosure</td><td>Server Header Leaks Version</td><td>Server header reveals: Microsoft-IIS/10.0</td><td class="recommendation">Remove or genericize the Server header</td></tr>
+      <tr><td><span class="severity-badge sev-low">Low</span></td><td>Cookies</td><td>Missing SameSite on Auth Cookie</td><td>Cookie 'ASP.NET_SessionId' missing SameSite attribute</td><td class="recommendation">Set SameSite=Strict or SameSite=Lax on session cookies</td></tr>
+      <tr><td><span class="severity-badge sev-pass">Pass</span></td><td>Account Policy</td><td>Guest Account</td><td>Guest account is disabled</td><td></td></tr>
+      <tr><td><span class="severity-badge sev-pass">Pass</span></td><td>Firewall</td><td>Windows Firewall (Domain)</td><td>Firewall is enabled on Domain</td><td></td></tr>
+      <tr><td><span class="severity-badge sev-pass">Pass</span></td><td>Firewall</td><td>Windows Firewall (Private)</td><td>Firewall is enabled on Private</td><td></td></tr>
+      <tr><td><span class="severity-badge sev-pass">Pass</span></td><td>Firewall</td><td>Windows Firewall (Public)</td><td>Firewall is enabled on Public</td><td></td></tr>
+      <tr><td><span class="severity-badge sev-pass">Pass</span></td><td>RDP</td><td>RDP Enabled</td><td>Remote Desktop is enabled</td><td></td></tr>
+      <tr><td><span class="severity-badge sev-pass">Pass</span></td><td>Updates</td><td>Windows Update Service</td><td>Windows Update service is running</td><td></td></tr>
+      <tr><td><span class="severity-badge sev-pass">Pass</span></td><td>Network</td><td>WinRM Configuration</td><td>WinRM is using HTTPS and encrypted traffic</td><td></td></tr>
+      <tr><td><span class="severity-badge sev-pass">Pass</span></td><td>Antivirus</td><td>Defender Active</td><td>Windows Defender is active. Signatures last updated: 2026-05-10</td><td></td></tr>
+      <tr><td><span class="severity-badge sev-pass">Pass</span></td><td>Logging</td><td>Security Log Enabled</td><td>Windows Security event log is enabled</td><td></td></tr>
+      <tr><td><span class="severity-badge sev-pass">Pass</span></td><td>Services</td><td>Telnet Disabled</td><td>Telnet service is not running</td><td></td></tr>
+      <tr><td><span class="severity-badge sev-pass">Pass</span></td><td>Services</td><td>SNMP Not Running</td><td>SNMP service is not running</td><td></td></tr>
+      <tr><td><span class="severity-badge sev-pass">Pass</span></td><td>SMB</td><td>SMB Null Sessions</td><td>Null session access is restricted</td><td></td></tr>
+      <tr><td><span class="severity-badge sev-pass">Pass</span></td><td>Account Policy</td><td>Minimum Password Length</td><td>Password minimum length is 14 (meets policy)</td><td></td></tr>
+      <tr><td><span class="severity-badge sev-info">Info</span></td><td>Network</td><td>WinRM Running</td><td>Windows Remote Management is active</td><td class="recommendation">Ensure HTTPS is used and authentication is restricted</td></tr>
+      <tr><td><span class="severity-badge sev-info">Info</span></td><td>Network</td><td>DNS Configuration</td><td>Primary DNS: 192.168.10.1, Secondary: 8.8.8.8</td><td class="recommendation">Consider using internal DNS only</td></tr>
+    </tbody>
+  </table>
+
+  <div class="footer">
+    Generated by WinSecAudit v1.0.0 | DEMO REPORT | 2026-05-11 | Confidential - Internal Use Only
+  </div>
+</div>
+</body>
+</html>
