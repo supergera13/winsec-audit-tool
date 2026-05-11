@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>PyVulnScan Report — http://127.0.0.1:3002</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #0f172a; color: #e2e8f0; padding: 2rem; }
+  .container { max-width: 1200px; margin: 0 auto; }
+  h1 { font-size: 1.8rem; margin-bottom: 0.5rem; }
+  .meta { color: #64748b; font-size: 0.9rem; margin-bottom: 2rem; }
+  .score-box { background: #1e293b; border-radius: 12px; padding: 2rem; text-align: center; margin-bottom: 2rem; }
+  .score-num { font-size: 4rem; font-weight: 700; color: #fbbf24; }
+  .stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; margin-bottom: 2rem; }
+  .stat { background: #1e293b; border-radius: 8px; padding: 1rem; text-align: center; }
+  .stat-count { font-size: 2rem; font-weight: 700; }
+  .stat-label { font-size: 0.8rem; color: #94a3b8; }
+  .critical { color: #ef4444; } .high { color: #f97316; } .medium { color: #eab308; }
+  .low { color: #a3a3a3; } .info { color: #38bdf8; }
+  table { width: 100%; border-collapse: collapse; }
+  th { background: #1e293b; padding: 0.75rem; text-align: left; font-size: 0.8rem; color: #94a3b8; text-transform: uppercase; }
+  td { padding: 0.75rem; border-bottom: 1px solid #1e293b; font-size: 0.85rem; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; }
+  .sev-critical { background: #7f1d1d; color: #fca5a5; }
+  .sev-high { background: #7c2d12; color: #fdba74; }
+  .sev-medium { background: #713f12; color: #fde047; }
+  .sev-low { background: #3f3f46; color: #a1a1aa; }
+  .sev-info { background: #0c4a6e; color: #7dd3fc; }
+  .fix { color: #94a3b8; font-style: italic; }
+  code { background: #1e293b; padding: 2px 6px; border-radius: 4px; font-size: 0.8rem; }
+  .footer { margin-top: 3rem; color: #475569; font-size: 0.8rem; text-align: center; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>PyVulnScan Report</h1>
+  <p class="meta">Target: http://127.0.0.1:3002 | Date: 2026-05-11 19:32 | Version: 1.0.0</p>
+  <div class="score-box">
+    <div>Security Score</div>
+    <div class="score-num">74/100</div>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="stat-count critical">0</div><div class="stat-label">Critical</div></div>
+    <div class="stat"><div class="stat-count high">2</div><div class="stat-label">High</div></div>
+    <div class="stat"><div class="stat-count medium">2</div><div class="stat-label">Medium</div></div>
+    <div class="stat"><div class="stat-count low">4</div><div class="stat-label">Low</div></div>
+    <div class="stat"><div class="stat-count info">0</div><div class="stat-label">Info</div></div>
+  </div>
+  <table>
+    <thead><tr><th>Severity</th><th>Category</th><th>Finding</th><th>URL</th><th>Description</th><th>Remediation</th></tr></thead>
+    <tbody>
+            <tr>
+                <td><span class="badge sev-high">High</span></td>
+                <td>SSL/TLS</td>
+                <td>No HTTPS</td>
+                <td><code>http://127.0.0.1:3002</code></td>
+                <td>Target does not use HTTPS</td>
+                <td class="fix">Enable HTTPS with a valid certificate. Redirect HTTP to HTTPS.</td>
+            </tr>
+            <tr>
+                <td><span class="badge sev-high">High</span></td>
+                <td>Security Headers</td>
+                <td>Missing HSTS</td>
+                <td><code>http://127.0.0.1:3002</code></td>
+                <td>HTTP header 'Strict-Transport-Security' is not set</td>
+                <td class="fix">Add: Strict-Transport-Security: max-age=31536000; includeSubDomains</td>
+            </tr>
+            <tr>
+                <td><span class="badge sev-medium">Medium</span></td>
+                <td>Security Headers</td>
+                <td>Missing CSP</td>
+                <td><code>http://127.0.0.1:3002</code></td>
+                <td>HTTP header 'Content-Security-Policy' is not set</td>
+                <td class="fix">Implement a Content-Security-Policy header</td>
+            </tr>
+            <tr>
+                <td><span class="badge sev-medium">Medium</span></td>
+                <td>Security Headers</td>
+                <td>Missing X-Frame-Options (Clickjacking)</td>
+                <td><code>http://127.0.0.1:3002</code></td>
+                <td>HTTP header 'X-Frame-Options' is not set</td>
+                <td class="fix">Add: X-Frame-Options: DENY</td>
+            </tr>
+            <tr>
+                <td><span class="badge sev-low">Low</span></td>
+                <td>Security Headers</td>
+                <td>Missing X-Content-Type-Options</td>
+                <td><code>http://127.0.0.1:3002</code></td>
+                <td>HTTP header 'X-Content-Type-Options' is not set</td>
+                <td class="fix">Add: X-Content-Type-Options: nosniff</td>
+            </tr>
+            <tr>
+                <td><span class="badge sev-low">Low</span></td>
+                <td>Security Headers</td>
+                <td>Missing X-XSS-Protection</td>
+                <td><code>http://127.0.0.1:3002</code></td>
+                <td>HTTP header 'X-XSS-Protection' is not set</td>
+                <td class="fix">Add: X-XSS-Protection: 1; mode=block</td>
+            </tr>
+            <tr>
+                <td><span class="badge sev-low">Low</span></td>
+                <td>Security Headers</td>
+                <td>Missing Referrer-Policy</td>
+                <td><code>http://127.0.0.1:3002</code></td>
+                <td>HTTP header 'Referrer-Policy' is not set</td>
+                <td class="fix">Add: Referrer-Policy: strict-origin-when-cross-origin</td>
+            </tr>
+            <tr>
+                <td><span class="badge sev-low">Low</span></td>
+                <td>Security Headers</td>
+                <td>Missing Permissions-Policy</td>
+                <td><code>http://127.0.0.1:3002</code></td>
+                <td>HTTP header 'Permissions-Policy' is not set</td>
+                <td class="fix">Add: Permissions-Policy: camera=(), microphone=(), geolocation=()</td>
+            </tr></tbody>
+  </table>
+  <div class="footer">Generated by PyVulnScan v1.0.0 | 2026-05-11T19:32:13.077668</div>
+</div>
+</body>
+</html>

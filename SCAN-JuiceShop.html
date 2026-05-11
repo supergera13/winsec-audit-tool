@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>PyVulnScan Report — https://juice-shop.herokuapp.com</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #0f172a; color: #e2e8f0; padding: 2rem; }
+  .container { max-width: 1200px; margin: 0 auto; }
+  h1 { font-size: 1.8rem; margin-bottom: 0.5rem; }
+  .meta { color: #64748b; font-size: 0.9rem; margin-bottom: 2rem; }
+  .score-box { background: #1e293b; border-radius: 12px; padding: 2rem; text-align: center; margin-bottom: 2rem; }
+  .score-num { font-size: 4rem; font-weight: 700; color: #ef4444; }
+  .stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; margin-bottom: 2rem; }
+  .stat { background: #1e293b; border-radius: 8px; padding: 1rem; text-align: center; }
+  .stat-count { font-size: 2rem; font-weight: 700; }
+  .stat-label { font-size: 0.8rem; color: #94a3b8; }
+  .critical { color: #ef4444; } .high { color: #f97316; } .medium { color: #eab308; }
+  .low { color: #a3a3a3; } .info { color: #38bdf8; }
+  table { width: 100%; border-collapse: collapse; }
+  th { background: #1e293b; padding: 0.75rem; text-align: left; font-size: 0.8rem; color: #94a3b8; text-transform: uppercase; }
+  td { padding: 0.75rem; border-bottom: 1px solid #1e293b; font-size: 0.85rem; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; }
+  .sev-critical { background: #7f1d1d; color: #fca5a5; }
+  .sev-high { background: #7c2d12; color: #fdba74; }
+  .sev-medium { background: #713f12; color: #fde047; }
+  .sev-low { background: #3f3f46; color: #a1a1aa; }
+  .sev-info { background: #0c4a6e; color: #7dd3fc; }
+  .fix { color: #94a3b8; font-style: italic; }
+  code { background: #1e293b; padding: 2px 6px; border-radius: 4px; font-size: 0.8rem; }
+  .footer { margin-top: 3rem; color: #475569; font-size: 0.8rem; text-align: center; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>PyVulnScan Report</h1>
+  <p class="meta">Target: https://juice-shop.herokuapp.com | Date: 2026-05-11 19:31 | Version: 1.0.0</p>
+  <div class="score-box">
+    <div>Security Score</div>
+    <div class="score-num">0/100</div>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="stat-count critical">5</div><div class="stat-label">Critical</div></div>
+    <div class="stat"><div class="stat-count high">4</div><div class="stat-label">High</div></div>
+    <div class="stat"><div class="stat-count medium">12</div><div class="stat-label">Medium</div></div>
+    <div class="stat"><div class="stat-count low">8</div><div class="stat-label">Low</div></div>
+    <div class="stat"><div class="stat-count info">3</div><div class="stat-label">Info</div></div>
+  </div>
+  <table>
+    <thead><tr><th>Severity</th><th>Category</th><th>Finding</th><th>URL</th><th>Description</th><th>Remediation</th></tr></thead>
+    <tbody>
+            <tr>
+                <td><span class="badge sev-critical">Critical</span></td>
+                <td>Sensitive Files</td>
+                <td>WordPress Config Backup</td>
+                <td><code>https://juice-shop.herokuapp.com/wp-config.php.bak</code></td>
+                <td>Database credentials exposed</td>
+                <td class="fix">Restrict access to /wp-config.php.bak</td>
+            </tr>
+            <tr>
+                <td><span class="badge sev-critical">Critical</span></td>
+                <td>Sensitive Files</td>
+                <td>PHP Config Backup</td>
+                <td><code>https://juice-shop.herokuapp.com/config.php.bak</code></td>
+                <td>Configuration backup accessible</td>
+                <td class="fix">Restrict access to /config.php.bak</td>
+            </tr>
+            <tr>
+                <td><span class="badge sev-critical">Critical</span></td>
+                <td>Sensitive Files</td>
+                <td>SQL Backup</td>
+                <td><code>https://juice-shop.herokuapp.com/backup.sql</code></td>
+                <td>Database dump accessible</td>
+                <td class="fix">Restrict access to /backup.sql</td>
+            </tr>
+            <tr>
+                <td><span class="badge sev-critical">Critical</span></td>
+                <td>Sensitive Files</td>
+                <td>SQL Dump</td>
+                <td><code>https://juice-shop.herokuapp.com/dump.sql</code></td>
+                <td>Database dump accessible</td>
+                <td class="fix">Restrict access to /dump.sql</td>
+            </tr>
+            <tr>
+                <td><span class="badge sev-critical">Critical</span></td>
+                <td>Sensitive Files</td>
+                <td>Spring Environment</td>
+                <td><code>https://juice-shop.herokuapp.com/actuator/env</code></td>
+                <td>Environment variables exposed</td>
+                <td class="fix">Restrict access to /actuator/env</td>
+            </tr>
+            <tr>
+                <td><span class="badge sev-high">High</span></td>
+                <td>Security Headers</td>
+                <td>Missing HSTS</td>
+                <td><code>https://juice-shop.herokuapp.com</code></td>
+                <td>HTTP header 'Strict-Transport-Security' is not set</td>
+                <td class="fix">Add: Strict-Transport-Security: max-age=31536000; includeSubDomains</td>
+            </tr>
+            <tr>
+                <td><span class="badge sev-high">High</span></td>
+                <td>Sensitive Files</td>
+                <td>Git Repository Exposed</td>
+                <td><code>https://juice-shop.herokuapp.com/.git/config</code></td>
+                <td>Source code and credentials may be accessible</td>
+                <td class="fix">Restrict access to /.git/config</td>
+            </tr>
+            <tr>
+                <td><span class="badge sev-high">High</span></td>
+                <td>Sensitive Files</td>
+                <td>SVN Repository</td>
+                <td><code>https://juice-shop.herokuapp.com/.svn/entries</code></td>
+                <td>Version control metadata exposed</td>
+                <td class="fix">Restrict access to /.svn/entries</td>
+            </tr>
+            <tr>
+                <td><span class="badge sev-high">High</span></td>
+                <td>Sensitive Files</td>
+                <td>Spring Actuator</td>
+                <td><code>https://juice-shop.herokuapp.com/actuator</code></td>
+                <td>Spring Boot actuator exposed</td>
+                <td class="fix">Restrict access to /actuator</td>
+            </tr>
+            <tr>
+                <td><span class="badge sev-medium">Medium</span></td>
+                <td>Security Headers</td>
+                <td>Missing CSP</td>
+                <td><code>https://juice-shop.herokuapp.com</code></td>
+                <td>HTTP header 'Content-Security-Policy' is not set</td>
+                <td class="fix">Implement a Content-Security-Policy header</td>
+            </tr>
+            <tr>
+                <td><span class="badge sev-medium">Medium</span></td>
+                <td>Sensitive Files</td>
+                <td>htaccess File</td>
+                <td><code>https://juice-shop.herokuapp.com/.htaccess</code></td>
+                <td>May contain sensitive configuration</td>
+                <td class="fix">Restrict access to /.htaccess</td>
+            </tr>
+            <tr>
+                <td><span class="badge sev-medium">Medium</span></td>
+                <td>Sensitive Files</td>
+                <td>Apache Server Status</td>
+                <td><code>https://juice-shop.herokuapp.com/server-status</code></td>
+                <td>Server status page exposed</td>
+                <td class="fix">Restrict access to /server-status</td>
+            </tr>
+            <tr>
+                <td><span class="badge sev-medium">Medium</span></td>
+                <td>Sensitive Files</td>
+                <td>Apache Server Info</td>
+                <td><code>https://juice-shop.herokuapp.com/server-info</code></td>
+                <td>Server info page exposed</td>
+                <td class="fix">Restrict access to /server-info</td>
+            </tr>
+            <tr>
+                <td><span class="badge sev-medium">Medium</span></td>
+                <td>Sensitive Files</td>
+                <td>Web.config</td>
+                <td><code>https://juice-shop.herokuapp.com/web.config</code></td>
+                <td>IIS configuration exposed</td>
+                <td class="fix">Restrict access to /web.config</td>
+            </tr>
+            <tr>
+                <td><span class="badge sev-medium">Medium</span></td>
+                <td>Sensitive Files</td>
+                <td>Cross-domain Policy</td>
+                <td><code>https://juice-shop.herokuapp.com/crossdomain.xml</code></td>
+                <td>Overly permissive cross-domain policy</td>
+                <td class="fix">Restrict access to /crossdomain.xml</td>
+            </tr>
+            <tr>
+                <td><span class="badge sev-medium">Medium</span></td>
+                <td>Sensitive Files</td>
+                <td>PHP Info</td>
+                <td><code>https://juice-shop.herokuapp.com/phpinfo.php</code></td>
+                <td>Server configuration exposed</td>
+                <td class="fix">Restrict access to /phpinfo.php</td>
+            </tr>
+            <tr>
+                <td><span class="badge sev-medium">Medium</span></td>
+                <td>Sensitive Files</td>
+                <td>PHP Info (alt)</td>
+                <td><code>https://juice-shop.herokuapp.com/info.php</code></td>
+                <td>Server configuration exposed</td>
+                <td class="fix">Restrict access to /info.php</td>
+            </tr>
+            <tr>
+                <td><span class="badge sev-medium">Medium</span></td>
+                <td>Sensitive Files</td>
+                <td>Debug Endpoint</td>
+                <td><code>https://juice-shop.herokuapp.com/debug</code></td>
+                <td>Debug mode may be enabled</td>
+                <td class="fix">Restrict access to /debug</td>
+            </tr>
+            <tr>
+                <td><span class="badge sev-medium">Medium</span></td>
+                <td>Sensitive Files</td>
+                <td>TRACE Endpoint</td>
+                <td><code>https://juice-shop.herokuapp.com/trace</code></td>
+                <td>HTTP TRACE enabled (XST risk)</td>
+                <td class="fix">Restrict access to /trace</td>
+            </tr>
+            <tr>
+                <td><span class="badge sev-medium">Medium</span></td>
+                <td>Sensitive Files</td>
+                <td>Swagger UI</td>
+                <td><code>https://juice-shop.herokuapp.com/swagger-ui.html</code></td>
+                <td>API documentation exposed</td>
+                <td class="fix">Restrict access to /swagger-ui.html</td>
+            </tr>
+            <tr>
+                <td><span class="badge sev-medium">Medium</span></td>
+                <td>HTTP Methods</td>
+                <td>TRACE Method Enabled (XST)</td>
+                <td><code>https://juice-shop.herokuapp.com</code></td>
+                <td>HTTP TRACE is enabled, enabling Cross-Site Tracing attacks</td>
+                <td class="fix">Disable TRACE method in web server configuration</td>
+            </tr>
+            <tr>
+                <td><span class="badge sev-low">Low</span></td>
+                <td>Security Headers</td>
+                <td>Missing X-XSS-Protection</td>
+                <td><code>https://juice-shop.herokuapp.com</code></td>
+                <td>HTTP header 'X-XSS-Protection' is not set</td>
+                <td class="fix">Add: X-XSS-Protection: 1; mode=block</td>
+            </tr>
+            <tr>
+                <td><span class="badge sev-low">Low</span></td>
+                <td>Security Headers</td>
+                <td>Missing Referrer-Policy</td>
+                <td><code>https://juice-shop.herokuapp.com</code></td>
+                <td>HTTP header 'Referrer-Policy' is not set</td>
+                <td class="fix">Add: Referrer-Policy: strict-origin-when-cross-origin</td>
+            </tr>
+            <tr>
+                <td><span class="badge sev-low">Low</span></td>
+                <td>Security Headers</td>
+                <td>Missing Permissions-Policy</td>
+                <td><code>https://juice-shop.herokuapp.com</code></td>
+                <td>HTTP header 'Permissions-Policy' is not set</td>
+                <td class="fix">Add: Permissions-Policy: camera=(), microphone=(), geolocation=()</td>
+            </tr>
+            <tr>
+                <td><span class="badge sev-low">Low</span></td>
+                <td>Information Disclosure</td>
+                <td>Server Header Leaks Version</td>
+                <td><code>https://juice-shop.herokuapp.com</code></td>
+                <td>Server header reveals: Heroku</td>
+                <td class="fix">Remove or genericize the Server header</td>
+            </tr>
+            <tr>
+                <td><span class="badge sev-low">Low</span></td>
+                <td>Sensitive Files</td>
+                <td>macOS DS_Store</td>
+                <td><code>https://juice-shop.herokuapp.com/.DS_Store</code></td>
+                <td>Reveals directory structure</td>
+                <td class="fix">Restrict access to /.DS_Store</td>
+            </tr>
+            <tr>
+                <td><span class="badge sev-low">Low</span></td>
+                <td>Sensitive Files</td>
+                <td>Package.json</td>
+                <td><code>https://juice-shop.herokuapp.com/package.json</code></td>
+                <td>Reveals dependencies</td>
+                <td class="fix">Restrict access to /package.json</td>
+            </tr>
+            <tr>
+                <td><span class="badge sev-low">Low</span></td>
+                <td>Sensitive Files</td>
+                <td>Composer.json</td>
+                <td><code>https://juice-shop.herokuapp.com/composer.json</code></td>
+                <td>Reveals PHP dependencies</td>
+                <td class="fix">Restrict access to /composer.json</td>
+            </tr>
+            <tr>
+                <td><span class="badge sev-low">Low</span></td>
+                <td>Sensitive Files</td>
+                <td>Test Page</td>
+                <td><code>https://juice-shop.herokuapp.com/test</code></td>
+                <td>Test/development page exposed</td>
+                <td class="fix">Restrict access to /test</td>
+            </tr>
+            <tr>
+                <td><span class="badge sev-info">Info</span></td>
+                <td>Sensitive Files</td>
+                <td>Robots.txt</td>
+                <td><code>https://juice-shop.herokuapp.com/robots.txt</code></td>
+                <td>May reveal hidden paths</td>
+                <td class="fix">Restrict access to /robots.txt</td>
+            </tr>
+            <tr>
+                <td><span class="badge sev-info">Info</span></td>
+                <td>Sensitive Files</td>
+                <td>Sitemap</td>
+                <td><code>https://juice-shop.herokuapp.com/sitemap.xml</code></td>
+                <td>Reveals site structure</td>
+                <td class="fix">Restrict access to /sitemap.xml</td>
+            </tr>
+            <tr>
+                <td><span class="badge sev-info">Info</span></td>
+                <td>Sensitive Files</td>
+                <td>Security.txt</td>
+                <td><code>https://juice-shop.herokuapp.com/.well-known/security.txt</code></td>
+                <td>Security contact info available</td>
+                <td class="fix">Restrict access to /.well-known/security.txt</td>
+            </tr></tbody>
+  </table>
+  <div class="footer">Generated by PyVulnScan v1.0.0 | 2026-05-11T19:31:31.258130</div>
+</div>
+</body>
+</html>
