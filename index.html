@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WinSecAudit — Windows Server Security Audit Tool</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: #0f172a; color: #e2e8f0; line-height: 1.7; }
+  
+  .hero { padding: 4rem 2rem; text-align: center; background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%); }
+  .hero h1 { font-size: 3rem; margin-bottom: 1rem; background: linear-gradient(to right, #818cf8, #34d399); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .hero p { font-size: 1.2rem; color: #94a3b8; max-width: 600px; margin: 0 auto 2rem; }
+  .cta { display: inline-block; padding: 14px 32px; background: #7c3aed; color: white; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 1.1rem; transition: background 0.2s; margin: 0 8px; }
+  .cta:hover { background: #6d28d9; }
+  .cta-secondary { background: #1e293b; border: 1px solid #334155; }
+  .cta-secondary:hover { background: #334155; }
+  
+  .container { max-width: 1000px; margin: 0 auto; padding: 0 2rem; }
+  
+  .features { padding: 4rem 0; }
+  .features h2 { text-align: center; font-size: 2rem; margin-bottom: 3rem; color: #f1f5f9; }
+  .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+  .feature { background: #1e293b; border-radius: 12px; padding: 2rem; border: 1px solid #334155; }
+  .feature h3 { color: #818cf8; margin-bottom: 0.5rem; font-size: 1.1rem; }
+  .feature p { color: #94a3b8; font-size: 0.95rem; }
+  
+  .demo { padding: 4rem 0; text-align: center; }
+  .demo h2 { font-size: 2rem; margin-bottom: 1rem; color: #f1f5f9; }
+  .demo p { color: #94a3b8; margin-bottom: 2rem; }
+  .demo-img { max-width: 100%; border-radius: 12px; border: 1px solid #334155; box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+  
+  .pricing { padding: 4rem 0; }
+  .pricing h2 { text-align: center; font-size: 2rem; margin-bottom: 3rem; color: #f1f5f9; }
+  .price-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+  .price-card { background: #1e293b; border-radius: 12px; padding: 2rem; text-align: center; border: 1px solid #334155; }
+  .price-card.featured { border-color: #7c3aed; box-shadow: 0 0 30px rgba(124,58,237,0.2); }
+  .price-card h3 { color: #818cf8; margin-bottom: 0.5rem; }
+  .price-card .price { font-size: 2.5rem; font-weight: 700; color: #f1f5f9; margin: 1rem 0; }
+  .price-card .price span { font-size: 1rem; color: #64748b; }
+  .price-card ul { list-style: none; text-align: left; margin: 1.5rem 0; }
+  .price-card ul li { padding: 0.5rem 0; color: #94a3b8; border-bottom: 1px solid #334155; }
+  .price-card ul li::before { content: "✓ "; color: #34d399; }
+  
+  .scans { padding: 4rem 0; }
+  .scans h2 { text-align: center; font-size: 2rem; margin-bottom: 1rem; color: #f1f5f9; }
+  .scans p { text-align: center; color: #94a3b8; margin-bottom: 2rem; }
+  .scan-results { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+  .scan-stat { background: #1e293b; border-radius: 8px; padding: 1.5rem; text-align: center; border: 1px solid #334155; }
+  .scan-stat .number { font-size: 2rem; font-weight: 700; }
+  .scan-stat .label { font-size: 0.8rem; color: #94a3b8; }
+  .critical { color: #ef4444; }
+  .high { color: #f97316; }
+  .medium { color: #eab308; }
+  .low { color: #a3a3a3; }
+  
+  .vulns { padding: 4rem 0; }
+  .vulns h2 { text-align: center; font-size: 2rem; margin-bottom: 1rem; color: #f1f5f9; }
+  .vulns p { text-align: center; color: #94a3b8; margin-bottom: 2rem; }
+  .vuln-card { background: #1e293b; border-radius: 12px; padding: 2rem; margin-bottom: 1.5rem; border: 1px solid #334155; }
+  .vuln-card h3 { color: #f97316; margin-bottom: 0.5rem; }
+  .vuln-card .meta { color: #64748b; font-size: 0.85rem; margin-bottom: 1rem; }
+  .vuln-card p { color: #94a3b8; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; }
+  .badge-high { background: #7c2d12; color: #fdba74; }
+  .badge-medium { background: #713f12; color: #fde047; }
+  
+  footer { padding: 3rem 0; text-align: center; color: #475569; border-top: 1px solid #1e293b; }
+  footer a { color: #818cf8; text-decoration: none; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>WinSecAudit</h1>
+  <p>Professional security audit tools for Windows Server and web applications. Run one command. Get a report. Fix what matters.</p>
+  <a href="https://github.com/supergera13/winsec-audit-tool" class="cta">View on GitHub</a>
+  <a href="https://github.com/supergera13/winsec-audit-tool#readme" class="cta cta-secondary">Documentation</a>
+</div>
+
+<div class="container">
+
+  <div class="features">
+    <h2>What You Get</h2>
+    <div class="feature-grid">
+      <div class="feature">
+        <h3>WinSecAudit (Windows Server)</h3>
+        <p>50+ security checks across 10 categories: passwords, firewall, RDP, SMB, services, updates, network, scheduled tasks, logging, antivirus. Professional HTML report with security score.</p>
+      </div>
+      <div class="feature">
+        <h3>PyVulnScan (Web Apps)</h3>
+        <p>8 vulnerability categories: SSL/TLS, security headers, sensitive files, XSS reflection, CORS, cookies, HTTP methods, open redirects. Works on any web application.</p>
+      </div>
+      <div class="feature">
+        <h3>Zero Dependencies</h3>
+        <p>WinSecAudit is pure PowerShell (built-in on Windows). PyVulnScan needs only Python + requests. No agents to install, no license servers, no cloud accounts.</p>
+      </div>
+      <div class="feature">
+        <h3>Dark-Themed Reports</h3>
+        <p>Professional HTML reports with security score (0-100), letter grade, severity-ranked findings, and exact remediation commands. Print-ready for PDF export.</p>
+      </div>
+      <div class="feature">
+        <h3>Bug Bounty Resources</h3>
+        <p>Complete hunting runbook, 21 fresh CVE targets, vulnerability report templates. Everything you need to start earning from bug bounties.</p>
+      </div>
+      <div class="feature">
+        <h3>Real Scan Results</h3>
+        <p>Tested against OWASP Juice Shop (32 findings), Httpbin.org (11 findings), and Firecrawl (8 findings). Proven to work on real targets.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="scans">
+    <h2>Proven Results</h2>
+    <p>Real scan output against publicly available test targets</p>
+    <div class="scan-results">
+      <div class="scan-stat">
+        <div class="number">51</div>
+        <div class="label">Total Findings</div>
+      </div>
+      <div class="scan-stat">
+        <div class="number critical">5</div>
+        <div class="label">Critical</div>
+      </div>
+      <div class="scan-stat">
+        <div class="number high">7</div>
+        <div class="label">High</div>
+      </div>
+      <div class="scan-stat">
+        <div class="number medium">18</div>
+        <div class="label">Medium</div>
+      </div>
+      <div class="scan-stat">
+        <div class="number low">17</div>
+        <div class="label">Low</div>
+      </div>
+      <div class="scan-stat">
+        <div class="number" style="color: #38bdf8">4</div>
+        <div class="label">Info</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="vulns">
+    <h2>Vulnerability Research</h2>
+    <p>Real vulnerabilities found in open-source projects through code analysis</p>
+    
+    <div class="vuln-card">
+      <h3>SSRF via User Webhook URL</h3>
+      <div class="meta">
+        <span class="badge badge-high">High</span> CVSS 7.5 | Open WebUI | CWE-918
+      </div>
+      <p>Any authenticated user can configure a webhook URL in notification settings. The server makes unvalidated POST requests to that URL when calendar alerts fire, enabling access to cloud metadata endpoints and internal services.</p>
+    </div>
+    
+    <div class="vuln-card">
+      <h3>DNS Rebinding in URL Validation</h3>
+      <div class="meta">
+        <span class="badge badge-high">High</span> CVSS 7.7 | Open WebUI | CWE-918
+      </div>
+      <p>The SSRF protection resolves hostnames and checks for private IPs, but is vulnerable to DNS rebinding attacks. The developers acknowledge this in a code comment. Bypasses all URL validation protections.</p>
+    </div>
+    
+    <div class="vuln-card">
+      <h3>XSS via Markdown-to-HTML Conversion</h3>
+      <div class="meta">
+        <span class="badge badge-medium">Medium</span> CVSS 5.4 | Open WebUI | CWE-79
+      </div>
+      <p>The /api/v1/utils/markdown endpoint converts user-supplied markdown to HTML using Python's markdown library without sanitization. Raw HTML passes through unchanged, enabling JavaScript injection.</p>
+    </div>
+  </div>
+
+  <div class="pricing">
+    <h2>Support This Project</h2>
+    <div class="price-grid">
+      <div class="price-card">
+        <h3>Free</h3>
+        <div class="price">$0</div>
+        <ul>
+          <li>Full source code on GitHub</li>
+          <li>WinSecAudit tool</li>
+          <li>PyVulnScan tool</li>
+          <li>Bug bounty runbook</li>
+          <li>Community support</li>
+        </ul>
+        <a href="https://github.com/supergera13/winsec-audit-tool" class="cta cta-secondary" style="display:block;text-align:center">Clone from GitHub</a>
+      </div>
+      <div class="price-card featured">
+        <h3>Supporter</h3>
+        <div class="price">$19 <span>one-time</span></div>
+        <ul>
+          <li>Everything in Free</li>
+          <li>Priority email support</li>
+          <li>Custom check requests</li>
+          <li>Early access to updates</li>
+          <li>Name in CONTRIBUTORS</li>
+        </ul>
+        <a href="https://github.com/sponsors/supergera13" class="cta" style="display:block;text-align:center">Sponsor on GitHub</a>
+      </div>
+      <div class="price-card">
+        <h3>Commercial</h3>
+        <div class="price">$49 <span>one-time</span></div>
+        <ul>
+          <li>Everything in Supporter</li>
+          <li>Unlimited internal use</li>
+          <li>Custom branding in reports</li>
+          <li>1-hour consultation call</li>
+          <li>Priority feature requests</li>
+        </ul>
+        <a href="https://github.com/sponsors/supergera13" class="cta" style="display:block;text-align:center">Get Commercial License</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="container">
+    <p>Built by <a href="https://github.com/supergera13">supergera13</a> | 
+       <a href="https://github.com/supergera13/winsec-audit-tool">GitHub</a> | 
+       <a href="https://github.com/supergera13/winsec-audit-tool/tree/master/RUNBOOK-BUG-BOUNTY.md">Bug Bounty Runbook</a></p>
+    <p style="margin-top:0.5rem;font-size:0.85rem">Security tools for the community. Use responsibly.</p>
+  </div>
+</footer>
+
+</body>
+</html>
