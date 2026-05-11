@@ -1,0 +1,7 @@
+{
+  "target": "https://juice-shop.herokuapp.com/api",
+  "scan_date": "2026-05-11T19:41:11.013777",
+  "version": "1.0.0",
+  "total_findings": 0,
+  "findings": []
+}

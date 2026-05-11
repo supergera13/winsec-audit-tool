@@ -1,0 +1,129 @@
+{
+  "target": "https://httpbin.org",
+  "scan_date": "2026-05-11T19:41:32.332237",
+  "version": "1.0.0",
+  "total_findings": 11,
+  "findings": [
+    {
+      "category": "Security Headers",
+      "name": "Missing HSTS",
+      "severity": "High",
+      "url": "https://httpbin.org",
+      "description": "HTTP header 'Strict-Transport-Security' is not set",
+      "evidence": "",
+      "remediation": "Add: Strict-Transport-Security: max-age=31536000; includeSubDomains",
+      "cvss": 6.1,
+      "timestamp": "2026-05-11T19:41:19.746347"
+    },
+    {
+      "category": "Security Headers",
+      "name": "Missing CSP",
+      "severity": "Medium",
+      "url": "https://httpbin.org",
+      "description": "HTTP header 'Content-Security-Policy' is not set",
+      "evidence": "",
+      "remediation": "Implement a Content-Security-Policy header",
+      "cvss": 5.0,
+      "timestamp": "2026-05-11T19:41:19.746401"
+    },
+    {
+      "category": "Security Headers",
+      "name": "Missing X-Content-Type-Options",
+      "severity": "Low",
+      "url": "https://httpbin.org",
+      "description": "HTTP header 'X-Content-Type-Options' is not set",
+      "evidence": "",
+      "remediation": "Add: X-Content-Type-Options: nosniff",
+      "cvss": 3.0,
+      "timestamp": "2026-05-11T19:41:19.746426"
+    },
+    {
+      "category": "Security Headers",
+      "name": "Missing X-Frame-Options (Clickjacking)",
+      "severity": "Medium",
+      "url": "https://httpbin.org",
+      "description": "HTTP header 'X-Frame-Options' is not set",
+      "evidence": "",
+      "remediation": "Add: X-Frame-Options: DENY",
+      "cvss": 4.0,
+      "timestamp": "2026-05-11T19:41:19.746446"
+    },
+    {
+      "category": "Security Headers",
+      "name": "Missing X-XSS-Protection",
+      "severity": "Low",
+      "url": "https://httpbin.org",
+      "description": "HTTP header 'X-XSS-Protection' is not set",
+      "evidence": "",
+      "remediation": "Add: X-XSS-Protection: 1; mode=block",
+      "cvss": 2.0,
+      "timestamp": "2026-05-11T19:41:19.746463"
+    },
+    {
+      "category": "Security Headers",
+      "name": "Missing Referrer-Policy",
+      "severity": "Low",
+      "url": "https://httpbin.org",
+      "description": "HTTP header 'Referrer-Policy' is not set",
+      "evidence": "",
+      "remediation": "Add: Referrer-Policy: strict-origin-when-cross-origin",
+      "cvss": 2.0,
+      "timestamp": "2026-05-11T19:41:19.746481"
+    },
+    {
+      "category": "Security Headers",
+      "name": "Missing Permissions-Policy",
+      "severity": "Low",
+      "url": "https://httpbin.org",
+      "description": "HTTP header 'Permissions-Policy' is not set",
+      "evidence": "",
+      "remediation": "Add: Permissions-Policy: camera=(), microphone=(), geolocation=()",
+      "cvss": 2.0,
+      "timestamp": "2026-05-11T19:41:19.746497"
+    },
+    {
+      "category": "Information Disclosure",
+      "name": "Server Header Leaks Version",
+      "severity": "Low",
+      "url": "https://httpbin.org",
+      "description": "Server header reveals: gunicorn/19.9.0",
+      "evidence": "",
+      "remediation": "Remove or genericize the Server header",
+      "cvss": 2.0,
+      "timestamp": "2026-05-11T19:41:19.746535"
+    },
+    {
+      "category": "Sensitive Files",
+      "name": "Robots.txt",
+      "severity": "Info",
+      "url": "https://httpbin.org/robots.txt",
+      "description": "May reveal hidden paths",
+      "evidence": "",
+      "remediation": "Restrict access to /robots.txt",
+      "cvss": 5.0,
+      "timestamp": "2026-05-11T19:41:20.653004"
+    },
+    {
+      "category": "CORS",
+      "name": "CORS Reflects Arbitrary Origin (https://evil.com)",
+      "severity": "Medium",
+      "url": "https://httpbin.org",
+      "description": "Server reflects 'https://evil.com' in Access-Control-Allow-Origin",
+      "evidence": "",
+      "remediation": "Validate and whitelist allowed origins",
+      "cvss": 5.0,
+      "timestamp": "2026-05-11T19:41:25.937199"
+    },
+    {
+      "category": "CORS",
+      "name": "CORS Reflects Arbitrary Origin (null)",
+      "severity": "Medium",
+      "url": "https://httpbin.org",
+      "description": "Server reflects 'null' in Access-Control-Allow-Origin",
+      "evidence": "",
+      "remediation": "Validate and whitelist allowed origins",
+      "cvss": 5.0,
+      "timestamp": "2026-05-11T19:41:26.441623"
+    }
+  ]
+}
