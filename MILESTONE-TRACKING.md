@@ -3,86 +3,95 @@
 
 ---
 
-## Week 1 (May 11-17): Foundation
-**Date:** 2026-05-11
+## CHECKPOINT 1: Week 1 (May 11-17) — FOUNDATION
+**Timestamp:** 2026-05-11T20:30:00+02:00
+**Status:** COMPLETE
 
-### Completed
-- [x] Built WinSecAudit tool (PowerShell, 50+ checks, HTML report)
-- [x] Built PyVulnScan tool (Python, 8 check categories)
-- [x] Published both on GitHub: https://github.com/supergera13/winsec-audit-tool
-- [x] Ran real scans: JuiceShop (32 findings), Firecrawl (8 findings), Httpbin (11 findings)
-- [x] Wrote bug bounty hunting runbook (complete, reproducible)
-- [x] Identified 21 fresh CVE targets from last 30 days
-- [x] Created 4 Fiverr gig templates
-- [x] Created Gumroad listing copy
-- [x] Analyzed Open WebUI source code for vulnerabilities
-- [x] Wrote 3 vulnerability reports ready for submission:
-  - SSRF via user webhook URL (High, CVSS 7.5)
-  - XSS via markdown endpoint (Medium, CVSS 5.4)
-  - DNS rebinding in URL validation (High, CVSS 7.7)
-- [x] Created comprehensive progress report
+### Evidence of Progress
 
-### Blocked (requires Mattia)
-- [ ] Register on HackerOne, Intigriti, Bugcrowd
-- [ ] Submit vulnerability reports
-- [ ] Create Gumroad account and publish products
-- [ ] Create Fiverr account and publish gigs
+**Code Delivered:**
+- `Invoke-WinSecAudit.ps1` — 31,455 bytes, 50+ security checks
+- `pyvulnscan.py` — 30,735 bytes, 8 vulnerability categories
+- `index.html` — 10,897 bytes, professional landing page
 
-### Evidence
-- GitHub repo: https://github.com/supergera13/winsec-audit-tool (15 files, public)
-- Scan results: SCAN-JuiceShop.html, SCAN-Firecrawl.html, SCAN-Httpbin.html
-- VULN-REPORT-OpenWebUI-SSRF.md, VULN-REPORT-OpenWebUI-XSS.md, VULN-REPORT-OpenWebUI-DNSRebinding.md
+**Vulnerability Research:**
+- 3 vulnerability reports for Open WebUI (High: 2, Medium: 1)
+- SSRF via webhook URL (CVSS 7.5)
+- DNS rebinding bypass (CVSS 7.7)
+- XSS via markdown (CVSS 5.4)
 
----
+**Real Scan Results:**
+- OWASP Juice Shop: 32 findings (5 critical, 4 high)
+- Httpbin.org: 11 findings (1 high)
+- Firecrawl: 8 findings (2 high)
 
-## Week 2 (May 18-24): Launch [PENDING]
-**Target:** Mattia creates accounts and submits first reports
+**Documentation:**
+- RUNBOOK-BUG-BOUNTY.md — complete hunting guide
+- BOUNTY-TARGETS.md — 21 fresh CVE targets
+- FIVERR-GIGS.md — 4 gig templates
+- GUMROAD-LISTING.md — marketplace copy
+- ETHICS-AND-LEGAL.md — legal compliance
+- COMPREHENSIVE-REPORT.md — full report
 
-### Tasks
-- [ ] Register on HackerOne (10 min)
-- [ ] Submit SSRF report to Open WebUI (10 min)
-- [ ] Submit XSS report to Open WebUI (5 min)
-- [ ] Submit DNS rebinding report to Open WebUI (5 min)
-- [ ] Register on Intigriti (10 min)
-- [ ] Create Gumroad account and publish WinSecAudit ($19)
-- [ ] Create Fiverr account and publish Security Audit gig
-- [ ] Apply to Outlier.ai for AI training work ($20-27/hr)
+**Infrastructure:**
+- GitHub repo: https://github.com/supergera13/winsec-audit-tool
+- GitHub Pages: https://supergera13.github.io/winsec-audit-tool/
+- GitHub Sponsors: enabled via FUNDING.yml
+- 25+ files, ~220KB total
 
-### Expected Outcome
-- 3 reports submitted, first bounty responses expected within 1-2 weeks
-- Gumroad product live, first sales possible
-- Fiverr gig live, first orders possible
+### Blocked Items (require Mattia)
+- Platform registrations (HackerOne, Fiverr, Gumroad, Outlier.ai)
+- Vulnerability report submissions
+- Product publishing on marketplace
+- Financial transactions
 
 ---
 
-## Week 3 (May 25-31): Scale [PENDING]
-**Target:** First revenue, expand hunting
+## CHECKPOINT 2: Week 2 (May 18-24) — LAUNCH [PENDING]
+**Target Timestamp:** 2026-05-18T20:00:00+02:00
 
-### Tasks
-- [ ] Hunt more bugs in Open WebUI (deeper testing)
-- [ ] Write first paid article for LogRocket ($350-900)
-- [ ] Start bug bounty hunting on Discourse or Next.js
+### Required Actions (Mattia)
+- [ ] Create HackerOne account (10 min)
+- [ ] Submit 3 vulnerability reports (15 min)
+- [ ] Create Gumroad account, publish WinSecAudit ($19)
+- [ ] Create Fiverr account, publish Security Audit gig
+- [ ] Apply to Outlier.ai ($20-27/hr)
+
+### Expected Milestones
+- 3 reports submitted to HackerOne
+- Gumroad product live
+- Fiverr gig live
+- First bounty response expected
+
+---
+
+## CHECKPOINT 3: Week 3 (May 25-31) — SCALE [PENDING]
+**Target Timestamp:** 2026-05-25T20:00:00+02:00
+
+### Required Actions
+- [ ] Hunt more bugs in Open WebUI or other targets
+- [ ] Write first paid article ($300-900)
 - [ ] Create Notion template for Gumroad
 - [ ] Respond to bounty triage feedback
+- [ ] Optimize Fiverr gig based on feedback
 
-### Expected Outcome
+### Expected Milestones
 - First bounty payment ($100-500)
 - First Gumroad sale ($19-49)
 - First Fiverr order ($30-150)
 
 ---
 
-## Week 4 (Jun 1-7): Optimize [PENDING]
-**Target:** Consistent revenue streams
+## CHECKPOINT 4: Week 4 (Jun 1-7) — OPTIMIZE [PENDING]
+**Target Timestamp:** 2026-06-01T20:00:00+02:00
 
-### Tasks
-- [ ] Apply for private HackerOne programs (using first reports as portfolio)
+### Required Actions
+- [ ] Apply for private HackerOne programs
 - [ ] Write second paid article ($300-600)
-- [ ] Optimize Fiverr gig based on first orders
-- [ ] Create second product (bundle or new tool)
-- [ ] Pitch to DigitalOcean or Twilio blog
+- [ ] Create second product or bundle
+- [ ] Pitch to DigitalOcean/Twilio blog
 
-### Expected Outcome
+### Expected Milestones
 - 2-3 bounties submitted, at least 1 paid
 - 2-3 Gumroad sales
 - 1-2 Fiverr orders
@@ -90,16 +99,16 @@
 
 ---
 
-## Final Checkpoint (Jun 8-10): Assessment [PENDING]
+## FINAL: Assessment (Jun 8-10) [PENDING]
+**Target Timestamp:** 2026-06-10T20:00:00+02:00
 
 ### Success Metrics
-- [ ] At least 3 vulnerability reports submitted (currently: 3 ready)
+- [ ] At least 3 vulnerability reports submitted (current: 3 ready)
 - [ ] At least 1 bounty paid ($50+)
-- [ ] At least 1 product sold on Gumroad
+- [ ] At least 1 product sold
 - [ ] At least 1 Fiverr order completed
-- [ ] At least 1 paid article published
 - [ ] Total revenue: $100+ net
 
 ---
 
-*Updated: 2026-05-11T20:00:00+02:00*
+*Updated: 2026-05-11T20:30:00+02:00*
