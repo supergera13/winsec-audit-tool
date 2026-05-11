@@ -1,141 +1,167 @@
 # Ethics & Legal Compliance Documentation
-## WinSecAudit / PyVulnScan / Bug Bounty Resources
+## Scope, Authorization, and Responsible Disclosure
 
 ---
 
-## 1. Tool Usage Ethics
+## 1. Scope Document — What Was Tested
 
-### WinSecAudit (PowerShell)
-- **Intended use:** Audit YOUR OWN servers or servers you have WRITTEN AUTHORIZATION to test
-- **Legal basis:** No network intrusion — reads local configuration only via PowerShell cmdlets
-- **Data handling:** Reports contain server configuration data. Store securely. Do not share publicly.
-- **Compliance:** Tool runs locally on the target machine. No data is sent externally.
+### Authorized Targets (explicitly designed for security testing)
 
-### PyVulnScan (Python)
-- **Intended use:** Scan web applications you OWN or have WRITTEN PERMISSION to test
-- **Legal basis:** Sends HTTP requests to the target. Must have authorization.
-- **Data handling:** Scan results may contain sensitive information. Handle per your organization's data policy.
-- **Rate limiting:** Tool sends requests sequentially with 10-second timeouts. Not designed for DoS.
+| Target | Authorization | Evidence |
+|--------|--------------|----------|
+| OWASP Juice Shop (juice-shop.herokuapp.com) | Official OWASP project, intentionally vulnerable, open to all | https://owasp.org/www-project-juice-shop/ |
+| Httpbin.org | Public HTTP testing service, designed for request/response testing | https://httpbin.org |
+| localhost:3002 (Firecrawl) | Our own infrastructure, full authorization | Self-owned server |
 
-### Bug Bounty Resources (Runbook, Reports)
-- **Intended use:** Participate in authorized bug bounty programs only
-- **Legal basis:** Bug bounty programs provide explicit authorization within their stated scope
-- **Scope compliance:** ALWAYS check the program's scope document before testing
-- **Disclosure:** Follow responsible disclosure timelines (standard: 90 days)
+### Code Review Targets (public repositories, no exploitation)
 
----
+| Repository | License | Analysis Type |
+|------------|---------|---------------|
+| open-webui/open-webui | MIT | Static code review only |
+| pallets/flask | BSD-3 | Static code review only |
+| encode/django-rest-framework | BSD-3 | Static code review only |
+| psf/requests | Apache-2.0 | Static code review only |
 
-## 2. Legal Framework
-
-### What's Legal
-- Testing systems YOU own
-- Testing systems with WRITTEN PERMISSION from the owner
-- Testing within the STATED SCOPE of a bug bounty program
-- Reporting vulnerabilities through the program's designated channel
-
-### What's ILLEGAL
-- Testing systems without authorization (Computer Fraud and Abuse Act, EU Computer Misuse Directive)
-- Accessing data belonging to other users without permission
-- Causing damage or disruption to services
-- Exfiltrating more data than necessary to demonstrate the vulnerability
-- Selling or sharing vulnerability details outside responsible disclosure
-
-### Key Legislation
-- **US:** Computer Fraud and Abuse Act (CFAA) — 18 U.S.C. § 1030
-- **EU:** Directive 2013/40/EU on attacks against information systems
-- **Italy:** Codice Penale Art. 615-ter (accesso abusivo a sistema informatico)
-- **GDPR:** Any personal data encountered during testing must be handled per GDPR requirements
-
----
-
-## 3. Vulnerability Report Ethics
-
-### Reports Written by This Agent
-All vulnerability reports in this repository (`VULN-REPORT-*.md`) were produced through:
-1. **Static code analysis** of publicly available open-source repositories
-2. **Review of public CVE databases** and security advisories
-3. **No active exploitation** of any live system
-4. **No access to private data** or user information
-5. **No denial-of-service** testing
-
-### Scope of Analysis
-- Open WebUI (https://github.com/open-webui/open-webui) — code review only
-- Flask (https://github.com/pallets/flask) — code review only
-- Django REST Framework (https://github.com/encode/django-rest-framework) — code review only
-- Requests (https://github.com/psf/requests) — code review only
-
-### Scan Targets
-All live scans were performed against:
-- **OWASP Juice Shop** (https://juice-shop.herokuapp.com) — intentionally vulnerable, designed for testing
-- **Httpbin.org** (https://httpbin.org) — HTTP request/response testing service
-- **Local services** (127.0.0.1) — our own infrastructure
-
-### What We Did NOT Do
-- No scanning of systems without authorization
-- No exploitation of vulnerabilities for data access
-- No denial-of-service attacks
+### What Was NOT Tested
+- No systems without explicit authorization
+- No production systems belonging to third parties
+- No systems behind authentication we don't own
+- No denial-of-service testing
 - No social engineering
-- No access to other users' data
-- No violation of any platform Terms of Service
+- No physical security testing
 
 ---
 
-## 4. GDPR Compliance
+## 2. Authorization Evidence
 
-### Data Processed
-- **Server configuration data** (WinSecAudit output): Generated locally, not transmitted
-- **Web application responses** (PyVulnScan output): HTTP response headers and status codes
-- **No personal data** was collected, stored, or processed during any scan or analysis
+### OWASP Juice Shop
+- **Official statement:** "OWASP Juice Shop is a deliberately insecure web application for security training" (https://owasp.org/www-project-juice-shop/)
+- **Scope:** All endpoints, all vulnerabilities are intentional
+- **Authorization:** Implicit — project exists specifically to be tested
+
+### Httpbin.org
+- **Purpose:** "A simple HTTP Request & Response Service" (https://httpbin.org)
+- **Scope:** All endpoints designed for testing
+- **Authorization:** Public service, no authentication required
+
+### Local Services
+- **Server:** 127.0.0.1:3002 (Firecrawl)
+- **Owner:** Self (boxxapps@serverhermes)
+- **Authorization:** Full — we own and operate this infrastructure
+
+### Open Source Code Review
+- **Method:** Read-only analysis of publicly available source code on GitHub
+- **No exploitation:** Findings are theoretical, based on code patterns
+- **No access:** No private data, no user data, no internal systems accessed
+
+---
+
+## 3. Data Handling & GDPR
+
+### Data Collected
+- **Personal data:** NONE
+- **Server configuration data:** Generated locally by WinSecAudit, not transmitted
+- **HTTP responses:** Headers and status codes only (no user data)
+- **Source code:** Publicly available repositories on GitHub
 
 ### Data Storage
-- All scan results are stored locally on the operator's machine
+- All scan results stored locally on operator's machine
 - GitHub repository contains no personal data
-- Reports reference only public configuration data, not user data
+- Reports reference only public configuration, not user data
 
-### Right to Erasure
-- If any scan result inadvertently contains personal data, it should be deleted immediately
-- The repository maintainer will respond to data removal requests within 30 days
+### GDPR Compliance
+- No personal data processed (Article 5)
+- No data transfers to third countries (Chapter V)
+- No automated decision-making (Article 22)
+- Data minimization principle followed (Article 5(1)(c))
 
 ---
 
-## 5. Responsible Disclosure Policy
+## 4. Responsible Disclosure Policy
 
 ### Timeline
-- **Day 0:** Vulnerability discovered and documented
-- **Day 1-3:** Report submitted to the project maintainer or bug bounty platform
-- **Day 3-90:** Coordination with maintainer on fix timeline
-- **Day 90+:** Public disclosure if fix is available; extend if fix is in progress
+- **Day 0:** Vulnerability discovered through code review
+- **Day 1:** Report written with full technical details
+- **Day 1-3:** Report submitted to project maintainer or bug bounty platform
+- **Day 3-90:** Coordination with maintainer on fix
+- **Day 90+:** Public disclosure if fixed; extend if in progress
 
-### Communication
-- Use the project's designated security reporting channel (SECURITY.md, HackerOne, email)
+### Communication Standards
+- Use project's designated security channel (SECURITY.md, HackerOne, email)
 - Provide clear, reproducible steps
+- Include CVSS score and impact assessment
 - Be responsive to maintainer questions
 - Accept severity assessments gracefully
 
 ### What We Won't Do
-- Publicly disclose unfixed vulnerabilities before the 90-day window
+- Publicly disclose unfixed vulnerabilities before 90-day window
 - Sell vulnerability details to third parties
-- Use vulnerabilities for personal gain beyond authorized bug bounty rewards
+- Use vulnerabilities for personal gain beyond authorized bounties
 - Chain vulnerabilities to maximize damage
+- Access or exfiltrate user data
 
 ---
 
-## 6. Disclaimer
+## 5. Tool Disclaimers
 
-These tools and resources are provided for **authorized security testing and educational purposes only**.
+### WinSecAudit
+```
+DISCLAIMER: This tool reads local Windows Server configuration using 
+built-in PowerShell cmdlets. It does NOT modify any settings, does NOT 
+send data externally, and does NOT require network access. Use only on 
+systems you own or have written authorization to audit.
+```
 
-The authors are not responsible for:
-- Misuse of these tools against unauthorized targets
-- Legal consequences of unauthorized testing
-- Any damage caused by improper use
+### PyVulnScan
+```
+DISCLAIMER: This tool sends HTTP requests to the target web application. 
+It does NOT exploit vulnerabilities, does NOT access user data, and does 
+NOT perform denial-of-service testing. Use only on applications you own 
+or have written authorization to scan. Respect rate limits and the 
+target's Terms of Service.
+```
 
-**By using these tools, you agree to:**
-1. Only test systems you own or have written authorization to test
-2. Comply with all applicable laws and regulations
-3. Follow responsible disclosure practices
-4. Not use these tools for malicious purposes
+### Bug Bounty Resources
+```
+DISCLAIMER: The runbook, vulnerability reports, and bounty targets are 
+for authorized security testing and educational purposes only. Always 
+check the program's scope document before testing. Follow responsible 
+disclosure practices. The authors are not responsible for misuse.
+```
+
+---
+
+## 6. Applicable Legislation
+
+### United States
+- Computer Fraud and Abuse Act (CFAA) — 18 U.S.C. § 1030
+- Authorization: All testing was within authorized scope
+
+### European Union
+- Directive 2013/40/EU on attacks against information systems
+- GDPR (Regulation (EU) 2016/679)
+- Authorization: All testing was within authorized scope
+
+### Italy (operator's jurisdiction)
+- Codice Penale Art. 615-ter (accesso abusivo a sistema informatico)
+- Authorization: All testing was within authorized scope or on self-owned systems
+
+---
+
+## 7. Compliance Checklist
+
+- [x] Only tested authorized targets (OWASP Juice Shop, Httpbin, localhost)
+- [x] Only reviewed public source code (GitHub repositories)
+- [x] No personal data collected or processed
+- [x] No unauthorized access to any system
+- [x] No denial-of-service testing
+- [x] No data exfiltration
+- [x] Responsible disclosure timeline documented
+- [x] Scope document for each target documented
+- [x] Tool disclaimers included
+- [x] Applicable legislation identified
 
 ---
 
 *Document created: 2026-05-11*
-*Last updated: 2026-05-11*
+*All evidence verifiable at: https://github.com/supergera13/winsec-audit-tool*

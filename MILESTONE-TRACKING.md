@@ -1,114 +1,106 @@
 # 30-Day Milestone Tracking
-## Start Date: 2026-05-11 | End Date: 2026-06-10
+## Start: 2026-05-11 | End: 2026-06-10
+## Repository: https://github.com/supergera13/winsec-audit-tool
 
 ---
 
-## CHECKPOINT 1: Week 1 (May 11-17) — FOUNDATION
-**Timestamp:** 2026-05-11T20:30:00+02:00
-**Status:** COMPLETE
+## CHECKPOINT 1 — Week 1 (May 11-17): Foundation
+**Timestamp:** 2026-05-11T21:00:00+02:00
 
-### Evidence of Progress
+### Deliverables Produced
 
-**Code Delivered:**
-- `Invoke-WinSecAudit.ps1` — 31,455 bytes, 50+ security checks
-- `pyvulnscan.py` — 30,735 bytes, 8 vulnerability categories
-- `index.html` — 10,897 bytes, professional landing page
+**Tools (code):**
+- `Invoke-WinSecAudit.ps1` — [view](https://github.com/supergera13/winsec-audit-tool/blob/master/Invoke-WinSecAudit.ps1)
+- `pyvulnscan.py` — [view](https://github.com/supergera13/winsec-audit-tool/blob/master/pyvulnscan.py)
+- `index.html` — [view](https://supergera13.github.io/winsec-audit-tool/)
 
-**Vulnerability Research:**
-- 3 vulnerability reports for Open WebUI (High: 2, Medium: 1)
-- SSRF via webhook URL (CVSS 7.5)
-- DNS rebinding bypass (CVSS 7.7)
-- XSS via markdown (CVSS 5.4)
+**Release:**
+- v1.0.0 — [download](https://github.com/supergera13/winsec-audit-tool/releases/tag/v1.0.0)
 
-**Real Scan Results:**
-- OWASP Juice Shop: 32 findings (5 critical, 4 high)
-- Httpbin.org: 11 findings (1 high)
-- Firecrawl: 8 findings (2 high)
+**Vulnerability Reports:**
+- SSRF (High, CVSS 7.5) — [view](https://github.com/supergera13/winsec-audit-tool/blob/master/VULN-REPORT-OpenWebUI-SSRF.md)
+- XSS (Medium, CVSS 5.4) — [view](https://github.com/supergera13/winsec-audit-tool/blob/master/VULN-REPORT-OpenWebUI-XSS.md)
+- DNS Rebinding (High, CVSS 7.7) — [view](https://github.com/supergera13/winsec-audit-tool/blob/master/VULN-REPORT-OpenWebUI-DNSRebinding.md)
+
+**Scan Results:**
+- Juice Shop (32 findings) — [HTML](https://github.com/supergera13/winsec-audit-tool/blob/master/SCAN-JuiceShop.html) | [JSON](https://github.com/supergera13/winsec-audit-tool/blob/master/SCAN-JuiceShop.json)
+- Httpbin (11 findings) — [HTML](https://github.com/supergera13/winsec-audit-tool/blob/master/SCAN-Httpbin.html) | [JSON](https://github.com/supergera13/winsec-audit-tool/blob/master/SCAN-Httpbin.json)
+- Firecrawl (8 findings) — [HTML](https://github.com/supergera13/winsec-audit-tool/blob/master/SCAN-Firecrawl.html) | [JSON](https://github.com/supergera13/winsec-audit-tool/blob/master/SCAN-Firecrawl.json)
 
 **Documentation:**
-- RUNBOOK-BUG-BOUNTY.md — complete hunting guide
-- BOUNTY-TARGETS.md — 21 fresh CVE targets
-- FIVERR-GIGS.md — 4 gig templates
-- GUMROAD-LISTING.md — marketplace copy
-- ETHICS-AND-LEGAL.md — legal compliance
-- COMPREHENSIVE-REPORT.md — full report
+- Runbook — [view](https://github.com/supergera13/winsec-audit-tool/blob/master/RUNBOOK-BUG-BOUNTY.md)
+- Bounty Targets — [view](https://github.com/supergera13/winsec-audit-tool/blob/master/BOUNTY-TARGETS.md)
+- Fiverr Gigs — [view](https://github.com/supergera13/winsec-audit-tool/blob/master/FIVERR-GIGS.md)
+- Gumroad Listing — [view](https://github.com/supergera13/winsec-audit-tool/blob/master/GUMROAD-LISTING.md)
+- Ethics & Legal — [view](https://github.com/supergera13/winsec-audit-tool/blob/master/ETHICS-AND-LEGAL.md)
+- Comprehensive Report — [view](https://github.com/supergera13/winsec-audit-tool/blob/master/COMPREHENSIVE-REPORT.md)
 
-**Infrastructure:**
-- GitHub repo: https://github.com/supergera13/winsec-audit-tool
+### Infrastructure
+- GitHub repo: https://github.com/supergera13/winsec-audit-tool (27 files, 252KB)
 - GitHub Pages: https://supergera13.github.io/winsec-audit-tool/
-- GitHub Sponsors: enabled via FUNDING.yml
-- 25+ files, ~220KB total
+- GitHub Release: https://github.com/supergera13/winsec-audit-tool/releases/tag/v1.0.0
+- GitHub Sponsors: enabled (FUNDING.yml)
 
-### Blocked Items (require Mattia)
+### Blocked (requires Mattia)
 - Platform registrations (HackerOne, Fiverr, Gumroad, Outlier.ai)
-- Vulnerability report submissions
-- Product publishing on marketplace
-- Financial transactions
+- Report submissions to bounty platforms
+- Product publishing on paid marketplaces
+- Financial transactions and withdrawals
 
 ---
 
-## CHECKPOINT 2: Week 2 (May 18-24) — LAUNCH [PENDING]
-**Target Timestamp:** 2026-05-18T20:00:00+02:00
+## CHECKPOINT 2 — Week 2 (May 18-24): Launch
+**Target:** 2026-05-18T21:00:00+02:00
+**Status:** PENDING (requires Mattia)
 
-### Required Actions (Mattia)
-- [ ] Create HackerOne account (10 min)
-- [ ] Submit 3 vulnerability reports (15 min)
-- [ ] Create Gumroad account, publish WinSecAudit ($19)
-- [ ] Create Fiverr account, publish Security Audit gig
-- [ ] Apply to Outlier.ai ($20-27/hr)
-
-### Expected Milestones
-- 3 reports submitted to HackerOne
-- Gumroad product live
-- Fiverr gig live
-- First bounty response expected
+### Actions Required
+1. Create HackerOne account → https://hackerone.com
+2. Submit SSRF report → copy from VULN-REPORT-OpenWebUI-SSRF.md
+3. Submit XSS report → copy from VULN-REPORT-OpenWebUI-XSS.md
+4. Submit DNS rebinding report → copy from VULN-REPORT-OpenWebUI-DNSRebinding.md
+5. Create Gumroad account → publish WinSecAudit at $19
+6. Create Fiverr account → paste gig from FIVERR-GIGS.md
+7. Apply to Outlier.ai → https://outlier.ai
 
 ---
 
-## CHECKPOINT 3: Week 3 (May 25-31) — SCALE [PENDING]
-**Target Timestamp:** 2026-05-25T20:00:00+02:00
+## CHECKPOINT 3 — Week 3 (May 25-31): Scale
+**Target:** 2026-05-25T21:00:00+02:00
+**Status:** PENDING
 
-### Required Actions
-- [ ] Hunt more bugs in Open WebUI or other targets
-- [ ] Write first paid article ($300-900)
-- [ ] Create Notion template for Gumroad
-- [ ] Respond to bounty triage feedback
-- [ ] Optimize Fiverr gig based on feedback
-
-### Expected Milestones
-- First bounty payment ($100-500)
-- First Gumroad sale ($19-49)
-- First Fiverr order ($30-150)
+### Actions Required
+1. Hunt more bugs (use RUNBOOK-BUG-BOUNTY.md + BOUNTY-TARGETS.md)
+2. Write first paid article for LogRocket ($350-900)
+3. Respond to bounty triage feedback
+4. Create Notion template for Gumroad
+5. Optimize Fiverr gig
 
 ---
 
-## CHECKPOINT 4: Week 4 (Jun 1-7) — OPTIMIZE [PENDING]
-**Target Timestamp:** 2026-06-01T20:00:00+02:00
+## CHECKPOINT 4 — Week 4 (Jun 1-7): Optimize
+**Target:** 2026-06-01T21:00:00+02:00
+**Status:** PENDING
 
-### Required Actions
-- [ ] Apply for private HackerOne programs
-- [ ] Write second paid article ($300-600)
-- [ ] Create second product or bundle
-- [ ] Pitch to DigitalOcean/Twilio blog
-
-### Expected Milestones
-- 2-3 bounties submitted, at least 1 paid
-- 2-3 Gumroad sales
-- 1-2 Fiverr orders
-- 1 article published
+### Actions Required
+1. Apply for private HackerOne programs
+2. Write second paid article ($300-600)
+3. Create second product or bundle
+4. Pitch to DigitalOcean/Twilio blog
 
 ---
 
-## FINAL: Assessment (Jun 8-10) [PENDING]
-**Target Timestamp:** 2026-06-10T20:00:00+02:00
+## FINAL — Assessment (Jun 8-10)
+**Target:** 2026-06-10T21:00:00+02:00
+**Status:** PENDING
 
 ### Success Metrics
-- [ ] At least 3 vulnerability reports submitted (current: 3 ready)
-- [ ] At least 1 bounty paid ($50+)
-- [ ] At least 1 product sold
-- [ ] At least 1 Fiverr order completed
-- [ ] Total revenue: $100+ net
+- 3+ vulnerability reports submitted (current: 3 ready)
+- 1+ bounty paid ($50+)
+- 1+ product sold
+- 1+ Fiverr order completed
+- Total revenue: $100+ net
 
 ---
 
-*Updated: 2026-05-11T20:30:00+02:00*
+*Updated: 2026-05-11T21:00:00+02:00*
+*All evidence: https://github.com/supergera13/winsec-audit-tool*
